@@ -2,13 +2,7 @@
 pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-
-//addNotary 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-//addToken smartContract(0xEf9f1ACE83dfbB8f559Da621f4aEA72C6EB10eBf) , 1
-//balanceOf 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-//transferFunds 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, [[0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 1]]
-
-contract EntryPoint {
+contract Legasi {
 
     struct Token {
         address erc20;
@@ -39,14 +33,13 @@ contract EntryPoint {
         notaries[notary] = true;
     }
 
+    function isNotary(address notary) external ownerOnly returns (bool result) {
+        return notaries[notary];
+    }
+
     function addToken(address token, uint256 amount) external {
         Token[] storage tokens = userTokens[msg.sender];
         tokens.push(Token(token, amount));
-    }
-
-    struct Allowance {
-        address token;
-        uint256 value;
     }
 
     function balanceOf(address from) external view notaryOnly returns (Token[] memory) {
