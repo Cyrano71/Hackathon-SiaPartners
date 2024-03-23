@@ -3,6 +3,7 @@
 ## Installation
 
 1. Install the packages
+
 `npm install`
 
 2. create .env file and put your private key:
