@@ -23,7 +23,7 @@ contract LegasiV0 {
         return notaries[notary];
     }
 
-    ///////////////////USER/////////////////////////////
+    ///////////////////DEAD MAN/////////////////////////////
     struct Balance {
         address erc20;
         uint256 value;
@@ -32,6 +32,22 @@ contract LegasiV0 {
     function addBalance(address token, uint256 amount) external {
         Balance[] storage balances = deadManBalance[msg.sender];
         balances.push(Balance(token, amount));
+    }
+
+    ///////////////////OWNER/////////////////////////////
+    mapping (address => bool) notaries;
+
+    function addNotary(address notary) external ownerOnly {
+        notaries[notary] = true;
+    }
+
+    function transferFunds(address deadMan) external ownerOnly {
+        Dispatch[] storage dispatch = heritageDispatch[deadMan];
+        uint256 length = dispatch.length;
+        for (uint256 i = 0; i < length; i++) 
+        {   
+            IERC20(dispatch[i].token).transfer(dispatch[i].heir, dispatch[i].amount);
+        }
     }
 
     ///////////////////NOTARY/////////////////////////////
@@ -56,21 +72,5 @@ contract LegasiV0 {
 
     function getDispatch(address deadMan) external view notaryOnly returns (Dispatch[] memory) {
         return heritageDispatch[deadMan];
-    }
-
-    ///////////////////OWNER/////////////////////////////
-    mapping (address => bool) notaries;
-
-    function addNotary(address notary) external ownerOnly {
-        notaries[notary] = true;
-    }
-
-    function transferFunds(address deadMan) external ownerOnly {
-        Dispatch[] storage dispatch = heritageDispatch[deadMan];
-        uint256 length = dispatch.length;
-        for (uint256 i = 0; i < length; i++) 
-        {   
-            IERC20(dispatch[i].token).transfer(dispatch[i].heir, dispatch[i].amount);
-        }
     }
 }
