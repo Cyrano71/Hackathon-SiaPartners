@@ -229,8 +229,8 @@
       ]
     },
     "C:\\Users\\berth\\Hackaton\\Hackathon-SiaPartners\\contracts\\LegasiV0.sol": {
-      "lastModificationDate": 1711212502154,
-      "contentHash": "967f19e133ada9e1a7319fe9b45beec6",
+      "lastModificationDate": 1711224106903,
+      "contentHash": "bb85ed07a8b84b11b010b819bb269fed",
       "sourceName": "contracts/LegasiV0.sol",
       "solcConfig": {
         "version": "0.8.24",

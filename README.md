@@ -25,7 +25,7 @@ npx hardhat run --network etherlinkTest scripts/deploy.js
 3. Get the address of the contract
 ```
 BaseContract {
-  target: '0x0f98D06E3A95c6C041e0A789758f810912398c99',
+  target: '0xfEA1961cD4cd613782d8d2d324d3d17a61Ddb4AB',
   interface: Interface {
     fragments: [
       [ConstructorFragment],
@@ -41,11 +41,22 @@ BaseContract {
 
 With https://testnet-explorer.etherlink.com/ you can view theses contracts :
 - MyToken contract address : 0x794c3C2BaF6fCA02EfbF69350885DBB2a0Dd2e93
-- Legasi contract address : 0x0f98D06E3A95c6C041e0A789758f810912398c99
+- Legasi contract address : 0xfEA1961cD4cd613782d8d2d324d3d17a61Ddb4AB
 
 Apply these commands: 
-```
-npx hardhat run --network etherlinkTest .\scripts\interact_legasi.js
 
+1. From the owner perspective : Interact with the MyToken contract to transfer the fund to the Legasi contract
+
+```
 npx hardhat run --network etherlinkTest .\scripts\interact_mytoken.js
 ```
+
+2. From the owner perspective : Interact with the Legasi contract to addBalance (the owner is also the dead man) and addNotary 
+
+```
+npx hardhat run --network etherlinkTest .\scripts\interact_legasi.js
+```
+
+3. From the notary perspective : Interact with the Legasi contract to balanceOf, addDispatch and getDispatch
+
+4. From the owner perspective : Interact with the Legasi contract to transferFunds
