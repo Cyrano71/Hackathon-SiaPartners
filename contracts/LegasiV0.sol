@@ -35,8 +35,8 @@ contract LegasiV0 {
     }
 
     ///////////////////NOTARY/////////////////////////////
-    function balanceOf(address deadMan) external view notaries returns (Balance[] memory) {
-        return deadManBalance[from];
+    function balanceOf(address deadMan) external view notaryOnly returns (Balance[] memory) {
+        return deadManBalance[deadMan];
     }
 
     struct Dispatch {
@@ -54,6 +54,10 @@ contract LegasiV0 {
         }
     }
 
+    function getDispatch(address deadMan) external view notaryOnly returns (Dispatch[] memory) {
+        return heritageDispatch[deadMan];
+    }
+
     ///////////////////OWNER/////////////////////////////
     mapping (address => bool) notaries;
 
@@ -66,7 +70,7 @@ contract LegasiV0 {
         uint256 length = dispatch.length;
         for (uint256 i = 0; i < length; i++) 
         {   
-            IERC20(dispatch[i].token).transfer(dispatch[i].heir, to[i].amount);
+            IERC20(dispatch[i].token).transfer(dispatch[i].heir, dispatch[i].amount);
         }
     }
 }
