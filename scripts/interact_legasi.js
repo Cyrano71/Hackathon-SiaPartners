@@ -19,7 +19,7 @@ async function callMyContract() {
   /* CAN ONLY BE USED BY THE NOTARY
   console.log(await contract.balanceOf(deadManAddress));
   */
-  console.log(await contract.transferFunds(deadManAddress, [[heirAddress, 10]]));
+  console.log(await contract.transferFunds(deadManAddress, [{heir: heirAddress, amount : 10}], { gasLimit: 1500000 }));
 }
 
 callMyContract().catch((error) => {
