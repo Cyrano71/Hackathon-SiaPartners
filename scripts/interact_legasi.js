@@ -4,7 +4,7 @@ async function callMyContract() {
   const MyContract = await ethers.getContractFactory("LegasiV0");
   const contract = MyContract.attach(
     // The deployed contract address
-    "0x10cd3D8F06AB501ec762429a2504555cE1c6B1F3"
+    "0xfEA1961cD4cd613782d8d2d324d3d17a61Ddb4AB"
   );
 
   const deadManAddress = "0x6CFb9257ef8E80edD6a268c51D28d2D5D597688a"
