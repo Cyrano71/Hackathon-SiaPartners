@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract Legasi {
+contract LegasiV0 {
 
     struct Token {
         address erc20;
@@ -33,7 +33,7 @@ contract Legasi {
         notaries[notary] = true;
     }
 
-    function isNotary(address notary) external ownerOnly returns (bool result) {
+    function isNotary(address notary) external view ownerOnly returns (bool result) {
         return notaries[notary];
     }
 
