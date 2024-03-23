@@ -45,5 +45,7 @@ With https://testnet-explorer.etherlink.com/ you can view theses contracts :
 
 Apply these commands: 
 ```
-npx hardhat run --network etherlinkTest .\scripts\interact.js
+npx hardhat run --network etherlinkTest .\scripts\interact_legasi.js
+
+npx hardhat run --network etherlinkTest .\scripts\interact_mytoken.js
 ```
