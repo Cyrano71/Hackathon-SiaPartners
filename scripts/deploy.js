@@ -2,7 +2,7 @@
 const { ethers } = require("hardhat");
 
 async function deployMyContract() {
-  const deployedContract = await ethers.deployContract("EntryPoint");
+  const deployedContract = await ethers.deployContract("MyToken");
   const contract = await deployedContract.waitForDeployment();
   console.log(contract);
 }
