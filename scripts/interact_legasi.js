@@ -4,7 +4,7 @@ async function callMyContract() {
   const MyContract = await ethers.getContractFactory("LegasiV0");
   const contract = MyContract.attach(
     // The deployed contract address
-    "0x0f98D06E3A95c6C041e0A789758f810912398c99"
+    "0x10cd3D8F06AB501ec762429a2504555cE1c6B1F3"
   );
 
   const deadManAddress = "0x6CFb9257ef8E80edD6a268c51D28d2D5D597688a"
@@ -14,12 +14,13 @@ async function callMyContract() {
   //console.log(await contract.isNotary(notaryAddress))
   //console.log(await contract.addNotary(notaryAddress));
   //console.log(await contract.isNotary(notaryAddress))
-  //console.log(await contract.addToken("0x794c3C2BaF6fCA02EfbF69350885DBB2a0Dd2e93", ethers.parseEther("10")));
+  console.log(await contract.transferToNotary("0x794c3C2BaF6fCA02EfbF69350885DBB2a0Dd2e93", notaryAddress));
   
   /* CAN ONLY BE USED BY THE NOTARY
   console.log(await contract.balanceOf(deadManAddress));
-  */
   console.log(await contract.transferFunds(deadManAddress, [{heir: heirAddress, amount : 10}], { gasLimit: 1500000 }));
+  */
+  
 }
 
 callMyContract().catch((error) => {

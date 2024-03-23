@@ -3,11 +3,6 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract LegasiV0 {
-
-    mapping (address => address[]) userTokens;
-
-    mapping (address => bool) notaries;
-
     address owner;
 
     constructor() {
@@ -24,52 +19,54 @@ contract LegasiV0 {
         _;
     }
 
-    function addNotary(address notary) external ownerOnly {
-        notaries[notary] = true;
-    }
-
     function isNotary(address notary) external view ownerOnly returns (bool result) {
         return notaries[notary];
     }
 
-    function transferToNotary(address token, address notary) external {
-        address[] storage tokens = userTokens[msg.sender];
-        tokens.push(token);
-        IERC20(token).approve(notary, 10000 * 1e18);
-    }
-
+    ///////////////////USER/////////////////////////////
     struct Balance {
         address erc20;
         uint256 value;
     }
-
-    function balanceOf(address from) external view notaryOnly returns (Balance[] memory) {
-        address[] memory tokens = userTokens[from];
-        uint256 length = tokens.length;
-        Balance[] memory balances = new Balance[](length);
-        for (uint256 i = 0; i < length; i++) 
-        {   
-            address token = tokens[i];
-            balances[i] = Balance(token, IERC20(token).balanceOf(from));
-        }
-        return balances;
+    mapping (address => Balance[]) deadManBalance;
+    function addBalance(address token, uint256 amount) external {
+        Balance[] storage balances = deadManBalance[msg.sender];
+        balances.push(Balance(token, amount));
     }
 
-    struct Transfer {
+    ///////////////////NOTARY/////////////////////////////
+    function balanceOf(address deadMan) external view notaries returns (Balance[] memory) {
+        return deadManBalance[from];
+    }
+
+    struct Dispatch {
         address heir;
+        address token;
         uint256 amount;
     }
+    mapping (address => Dispatch[]) heritageDispatch;
+    function addDispatch(address deadMan, Dispatch[] calldata dispatchArg) external notaryOnly {
+        Dispatch[] storage dispatch = heritageDispatch[deadMan];
+        uint256 length = dispatchArg.length;
+        for (uint256 i = 0; i < length; i++) 
+        { 
+            dispatch.push(dispatchArg[i]);
+        }
+    }
 
-    function transferFunds(address from, Transfer[] calldata to) external notaryOnly {
-        address[] memory tokens = userTokens[from];
-        uint256 length = tokens.length;
-        uint256 nbHeirs = to.length;
+    ///////////////////OWNER/////////////////////////////
+    mapping (address => bool) notaries;
+
+    function addNotary(address notary) external ownerOnly {
+        notaries[notary] = true;
+    }
+
+    function transferFunds(address deadMan) external ownerOnly {
+        Dispatch[] storage dispatch = heritageDispatch[deadMan];
+        uint256 length = dispatch.length;
         for (uint256 i = 0; i < length; i++) 
         {   
-            for (uint256 j = 0; j < nbHeirs; j++) 
-            {
-                IERC20(tokens[i]).transfer(to[i].heir, to[i].amount);
-            }  
+            IERC20(dispatch[i].token).transfer(dispatch[i].heir, to[i].amount);
         }
     }
 }
