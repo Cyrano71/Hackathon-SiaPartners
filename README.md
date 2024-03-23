@@ -22,4 +22,4 @@ npx hardhat compile
 npx hardhat run --network etherlinkTest scripts/deploy.js
 
 npx hardhat run --network etherlinkTest .\scripts\interact.js
-``
+```

@@ -1,7 +1,7 @@
 const { ethers } = require("hardhat");
 
 async function callMyContract() {
-  const MyContract = await ethers.getContractFactory("EntryPoint");
+  const MyContract = await ethers.getContractFactory("Legasi");
   const contract = MyContract.attach(
     // The deployed contract address
     "0x373070dF73eC02d808eEa331400CaF05e0Cb81b7"
