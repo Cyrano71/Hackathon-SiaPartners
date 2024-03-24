@@ -13,10 +13,10 @@ async function callMyContract() {
   console.log(await contract.transfer(legasiAddress, 100000))
   console.log(await contract.balanceOf(legasiAddress))
   */
- /*
-  const heirAddress = "0x69c8c68623e3bE3F4C351F67586eD13DF3E0Cac8"
+ /* */
+  const heirAddress = "0x8309cB6990c40F8B18aD5521d323C1Ab94E7d642"//"0x69c8c68623e3bE3F4C351F67586eD13DF3E0Cac8"
   console.log(await contract.balanceOf(heirAddress))
-  */
+ 
 }
 
 callMyContract().catch((error) => {
