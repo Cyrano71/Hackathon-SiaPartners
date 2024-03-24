@@ -63,7 +63,7 @@ npx hardhat run --network etherlinkTest .\scripts\interact_legasi.js
 
 5. Result
 
-![alt text](./images/imgage1.png)
+![alt text](images/image1.png)
 
 
-![alt text](./images/imgage2.png)
+![alt text](images/image2.png)
