@@ -60,3 +60,10 @@ npx hardhat run --network etherlinkTest .\scripts\interact_legasi.js
 3. From the notary perspective : Interact with the Legasi contract to balanceOf, addDispatch and getDispatch
 
 4. From the owner perspective : Interact with the Legasi contract to transferFunds
+
+5. Result
+
+![alt text](./images/imgage1.png)
+
+
+![alt text](./images/imgage2.png)
